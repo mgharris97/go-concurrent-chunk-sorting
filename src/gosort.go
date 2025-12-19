@@ -1,3 +1,10 @@
+/*
+	Matthew Harris
+	241ADB166
+	Graded Go Lab
+	Dec. 20, 2025
+*/
+
 package main
 
 import (
@@ -41,14 +48,23 @@ func main() {
 	}
 
 	// chunking
+	// number of chunks = ceil(sqrt(n))
 	numOfChunks := int(math.Ceil(math.Sqrt(float64(n))))
 	if numOfChunks < 4 {
 		numOfChunks = 4
 	}
-	// create chunks of size n from the nums array
-	// slices.Chunk(slice, size)l
-	var size int = 2
-	chunks := slices.Chunk(nums, size)
+	// chunck size should be roughly equal. Total number of ints / number of chunks = chunk size
+	chunkSize := int(math.Ceil(float64(n) / float64(numOfChunks)))
+	chunks := slices.Chunk(nums, chunkSize)
+
+	// for testing purposes
+	fmt.Printf("n = %d, numOfChunks = %d, chunkSize = %d\n", n, numOfChunks, chunkSize)
+
+	i := 0
+	for c := range chunks {
+		fmt.Printf("Chunk %d size: %d\n", i, len(c))
+		i++
+	}
 
 }
 
